@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~  Licensed to the Apache Software Foundation (ASF) under one
+  ~  or more contributor license agreements.  See the NOTICE file
+  ~  distributed with this work for additional information
+  ~  regarding copyright ownership.  The ASF licenses this file
+  ~  to you under the Apache License, Version 2.0 (the
+  ~  "License"); you may not use this file except in compliance
+  ~  with the License.  You may obtain a copy of the License at
+  ~
+  ~   http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~  Unless required by applicable law or agreed to in writing,
+  ~  software distributed under the License is distributed on an
+  ~   * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~  KIND, either express or implied.  See the License for the
+  ~  specific language governing permissions and limitations
+  ~  under the License.
+  -->
+<assembly>
+    <id>bin</id>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <formats>
+        <format>zip</format>
+    </formats>
+
+    <fileSets>
+        <fileSet>
+            <directory>src/main/resources/bin</directory>
+            <outputDirectory>${project.build.finalName}/</outputDirectory>
+            <fileMode>0755</fileMode>
+            <includes>
+                <include>start.bat</include>
+                <include>install.bat</include>
+                <include>uninstall.bat</include>
+                <include>start.sh</include>
+                <include>stop.sh</include>
+                <include>console.sh</include>
+                <include>restart.sh</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.build.directory}/lib</directory>
+            <outputDirectory>${project.build.finalName}/lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.parent.basedir}/api-gateway/src/main/resources</directory>
+            <outputDirectory>${project.build.finalName}/conf</outputDirectory>
+            <includes>
+                <include>*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>${project.parent.basedir}/api-gateway/src/main/resources/conf</directory>
+            <outputDirectory>${project.build.finalName}/conf</outputDirectory>
+            <includes>
+                <include>*.*</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>src/main/resources/script</directory>
+            <outputDirectory>${project.build.finalName}/bin</outputDirectory>
+            <fileMode>0755</fileMode>
+            <includes>
+                <include>server</include>
+                <include>server.bat</include>
+            </includes>
+        </fileSet>
+
+<!--        <fileSet>
+            <directory>${project.basedir}/resources/crypto</directory>
+            <outputDirectory>api-gateway/crypto</outputDirectory>
+            <includes>
+                <include>x64/*.*</include>
+                <include>x86/*.*</include>
+            </includes>
+        </fileSet>-->
+
+        <fileSet>
+            <directory>src/main/resources/script/jsw</directory>
+            <outputDirectory>${project.build.finalName}/bin/jsw</outputDirectory>
+            <fileMode>0755</fileMode>
+            <includes>
+                <include>conf/wrapper-setting.conf</include>
+                <include>lib/*.*</include>
+                <include>license/*.*</include>
+
+                <include>linux-ppc-64/wrapper</include>
+
+                <include>linux-x86-32/wrapper</include>
+                <include>linux-x86-64/wrapper</include>
+
+                <include>macosx-universal-32/wrapper</include>
+                <include>macosx-universal-64/wrapper</include>
+
+                <include>solaris-sparc-32/wrapper</include>
+                <include>solaris-sparc-64/wrapper</include>
+
+                <include>solaris-x86-32/wrapper</include>
+
+                <include>windows-x86-32/wrapper.exe</include>
+                <include>windows-x86-64/wrapper.exe</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>src/main/resources/script/jsw</directory>
+            <outputDirectory>${project.build.finalName}/bin/jsw</outputDirectory>
+            <includes>
+                <include>conf/*.*</include>
+            </includes>
+        </fileSet>
+
+        <!--覆盖之前的启动配置，增加jmx配置，开启jmx端口，正式环境需要去除该配置-->
+        <!--<fileSet>
+            <directory>src/main/config</directory>
+            <outputDirectory>main/bin/jsw/conf</outputDirectory>
+            <includes>
+                <include>wrapper.conf</include>
+            </includes>
+        </fileSet>-->
+
+    </fileSets>
+
+    <dependencySets>
+        <dependencySet>
+            <useProjectArtifact>true</useProjectArtifact>
+            <outputDirectory>${project.build.finalName}/lib</outputDirectory>
+            <unpack>false</unpack>
+            <includes>
+                <include>cn.com.zysoft:${project.build.finalName}:jar</include>
+            </includes>
+        </dependencySet>
+    </dependencySets>
+</assembly>
